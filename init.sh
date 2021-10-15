@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-if [ "x$1 = "xmaster" ]; then
+if [ "x$1" = "xmaster" ]; then
     while true; do
         echo master running
         sleep 30
