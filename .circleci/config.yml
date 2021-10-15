@@ -22,7 +22,7 @@ jobs:
       - run:
           name: "Build Image"
           command: |
-            TAG=$(awk -F= '/ARG JMETER_VERSION/{print $2} Dockerfile)
+            TAG=$(awk -F= '/ARG JMETER_VERSION/{print $2}' Dockerfile)
             docker build -t $my_docker_u/jmeter:$TAG  .
             docker push $my_docker_u/jmeter:$TAG
 
