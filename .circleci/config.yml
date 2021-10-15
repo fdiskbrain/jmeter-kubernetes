@@ -5,7 +5,7 @@ version: 2.1
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  say-hello:
+  build:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
     docker:
@@ -14,13 +14,24 @@ jobs:
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
       - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
+          name: "Docker login"
+          command: "echo $my_docker_ak | docker login -u $my_docker_u --password-stdin"
+      - run:
+          name: "Build Image"
+          command: |
+            TAG=$(awk -F= '/ARG JMETER_VERSION/{print $2}' Dockerfile)-$CIRCLE_BUILD_NUM
+            docker build -t $my_docker_u/jmeter:$TAG  .
+            docker push $my_docker_u/jmeter:$TAG
+
+
+
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  say-hello-workflow:
+  jmeter-flow:
     jobs:
-      - say-hello
+      - build

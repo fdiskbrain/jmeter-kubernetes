@@ -18,7 +18,7 @@ spec:
       - name: jmmaster
         image: jmeter:latest
         imagePullPolicy: IfNotPresent
-        command: [ "master" ]
+        args: [ "master" ]
         volumeMounts:
           - name: loadtest
             mountPath: /load_test
@@ -29,3 +29,4 @@ spec:
       - name: loadtest 
         configMap:
          name: jmeter-load-test
+         defaultMode: 0777
