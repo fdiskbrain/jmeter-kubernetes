@@ -1,0 +1,7 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - jmeter_master_configmap.yaml
+  - jmeter_master_deploy.yaml
+  - jmeter_slaves_deploy.yaml
+  - jmeter_slaves_svc.yaml
