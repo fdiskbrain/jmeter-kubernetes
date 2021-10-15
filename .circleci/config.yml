@@ -17,8 +17,17 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
       - run:
+          name: "Docker login"
+          command: "echo $my_docker_ak | docker login -u $my_docker_u --password-stdin"
+      - run:
           name: "Build Image"
-          command: "docker build -t jmeter:$(awk -F= '/ARG JMETER_VERSION/{print $2}' Dockerfile) ."
+          command: -|
+            TAG=$(awk -F= '/ARG JMETER_VERSION/{print $2} Dockerfile)
+            docker build -t $my_docker_u/jmeter:$TAG  .
+            docker push $my_docker_u/jmeter:$TAG
+
+
+
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
