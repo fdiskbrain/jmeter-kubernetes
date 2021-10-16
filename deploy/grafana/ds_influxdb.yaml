@@ -1,0 +1,9 @@
+apiVersion: 1
+datasources:
+  - name: jmeterdb
+    type: influxdb
+    url: http://jmeter-influxdb:8086
+    user: admin
+    password: admin
+    database: jmeter
+    isDefault: true
