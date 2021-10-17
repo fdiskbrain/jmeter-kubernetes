@@ -24,9 +24,9 @@ Kubernetes > 1.16
 	```   
 
 1. Use grafana dashboards
-        # Mac os
+        
 	```bash
-
+        # Mac os
 	kubectl -n ${TEST_NAMESPACE} port-forward service/jmeter-grafana  3000:3000 &
 	open http://localhost:3000
 	fg
