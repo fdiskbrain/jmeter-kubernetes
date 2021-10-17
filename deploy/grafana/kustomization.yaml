@@ -3,3 +3,13 @@ kind: Kustomization
 resources:
   - deployment.yaml
   - service.yaml
+configMapGenerator:
+  - name: jmeter-grafana
+    files:
+      - ds_influxdb.yaml
+      - dashboard.yaml
+  - name: jmeter-dashboards
+    files:
+      - GrafanaJMeterTemplate.json
+generatorOptions:
+  disableNameSuffixHash: true
