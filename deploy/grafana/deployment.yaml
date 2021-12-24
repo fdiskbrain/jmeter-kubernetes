@@ -16,12 +16,13 @@ spec:
     spec:
       containers:
         - name: grafana
-          image: grafana/grafana:8.2.1
+          image: grafana/grafana:8.2.6
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3000
               protocol: TCP
           env:
+
             - name: GF_AUTH_BASIC_ENABLED
               value: "true"
             - name: GF_USERS_ALLOW_ORG_CREATE
@@ -43,6 +44,11 @@ spec:
               subPath: dashboard.yaml
             - mountPath: /etc/grafana/dashboards
               name: jmeter-dashboards
+            - mountPath: /var/lib/grafana
+              name: grafana-pv
+            - mountPath: /etc/grafana/grafana.ini
+              name: jmeter-grafana
+              subPath: grafana.ini
       volumes:
         - name: jmeter-grafana
           configMap:
@@ -50,5 +56,9 @@ spec:
         - name: jmeter-dashboards
           configMap:
             name: jmeter-dashboards
+        - name: grafana-pv
+          persistentVolumeClaim:
+            claimName: grafana-pvc
+
 
               

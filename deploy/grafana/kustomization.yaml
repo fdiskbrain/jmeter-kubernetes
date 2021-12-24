@@ -8,6 +8,7 @@ configMapGenerator:
     files:
       - ds_influxdb.yaml
       - dashboard.yaml
+      - grafana.ini
   - name: jmeter-dashboards
     files:
       - GrafanaJMeterTemplate.json
