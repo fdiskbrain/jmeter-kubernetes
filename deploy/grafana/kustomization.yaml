@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - deployment.yaml
   - service.yaml
+  - pvc.yaml
 configMapGenerator:
   - name: jmeter-grafana
     files:
@@ -12,5 +13,11 @@ configMapGenerator:
   - name: jmeter-dashboards
     files:
       - GrafanaJMeterTemplate.json
+      - GrafanaJMeterTemplate2.json
+
 generatorOptions:
   disableNameSuffixHash: true
+commonLabels:
+  version: v8
+nameSuffix: -v8
+  

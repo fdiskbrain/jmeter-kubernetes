@@ -14,6 +14,8 @@ spec:
       labels:
         app: jmeter-grafana
     spec:
+      securityContext:
+        fsGroup: 472
       containers:
         - name: grafana
           image: grafana/grafana:8.2.6
@@ -46,6 +48,7 @@ spec:
               name: jmeter-dashboards
             - mountPath: /var/lib/grafana
               name: grafana-pv
+              readOnly: false
             - mountPath: /etc/grafana/grafana.ini
               name: jmeter-grafana
               subPath: grafana.ini

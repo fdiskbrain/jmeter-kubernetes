@@ -4,8 +4,10 @@ kind: PersistentVolumeClaim
 metadata:
   name: grafana-pvc
 spec:
+  storageClassName: alicloud-disk-ssd
+  volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
+      storage: 25Gi
